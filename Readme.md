@@ -1,14 +1,21 @@
 # Rasmuss
 Remote ASeMbler Single Step
 
-Executes machine code instructions on a remote host (with possibly a different CPU architecture from your local machine), and outputs CPU register values after each step.
+Executes machine code instructions on a remote host (possibly a different CPU architecture from your local machine), and outputs a line of JSON containing CPU register values for each step.
 
 ## Why?
-I am using this to create test fixtures for an ARM32 CPU emulator.
+I am using this to create test fixtures for an ARM32 CPU emulator. The emulator's test suite will initialize the emulated CPU's registers from the first line of `rasmuss`' output. Then it runs the emulation for the opcode in `nextInstruction` and compares the impact this has on the emulated CPU registers to what the real ARM CPU did running the same code inside a BananaPi connected via Ethernet. 
+
+## Prerequisits
+`gcc` and `gdb` need to be installed on the remote machine.
 
 ## Command Line Usage
 
-```bash
+Pipe assembler code into `rasmus` and specify the target machine and (optionally) a username.
+
+__HINT__ set-up passwordless ssh authentication to save keystrokes.
+
+``` bash
 $ npm install -g rasmuss
 $ cat demo.s
 mov r0, #0x200
