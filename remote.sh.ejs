@@ -1,0 +1,37 @@
+TMPFILE=rasmus
+TMPFILE=`mktemp /tmp/${TMPFILE}.XXXXXX`.s || exit 1
+
+# run assembler
+cat - > $TMPFILE <<"asjhdgfiwey"
+.global main
+main:
+<%- asm %>
+__rasmuss_end:
+asjhdgfiwey
+gcc $TMPFILE -o rasmuss.o || exit 1
+
+# single-step and print registers until
+# htting label __end
+gdb <<"regfidjbuewod"
+set confirm off
+set prompt \n
+set pagination off
+file rasmuss.o
+break main
+define rasmuss_info
+  echo REGISTERS\n
+  info registers
+  echo /REGISTERS\n
+  output/x *((unsigned int*)$pc)
+  printf " #"
+  x/i $pc
+end
+run
+rasmuss_info
+while ($pc != __rasmuss_end)
+    stepi
+    rasmuss_info
+end
+regfidjbuewod
+rm $TMPFILE
+

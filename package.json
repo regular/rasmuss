@@ -1,0 +1,22 @@
+{
+  "name": "rasmuss",
+  "version": "1.0.0",
+  "description": "remote execute assembler code and show register changing after each instruction.",
+  "main": "index.js",
+  "keywords": [
+    "assembler",
+    "cross compilation",
+    "single-step",
+    "trace",
+    "machine code",
+    "gdb"
+  ],
+  "author": "Jan Bölsche <jan@lagomorph.de> (http://regular.codes)",
+  "license": "MIT",
+  "dependencies": {
+    "concat-stream": "^1.5.0",
+    "ejs": "^2.3.2",
+    "split": "^1.0.0",
+    "through": "^2.3.7"
+  }
+}
